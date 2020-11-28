@@ -1,17 +1,38 @@
 import React from 'react';
 
-const DataTable = ({data}) => {
-    const columns = data[0] && Object.keys(data[0]);
-    console.log(columns);
+const DataTable = (props) => {
+    
+    const columns = props.data[0] && Object.keys(props.data[0]);
+    console.log(props.searchColumns);
+
+    const filter = (e) => {
+        console.log(e);
+        props.setSearchColumns([e]);
+    }
 
     return(
         <div>
             <table>
                 <thead>
-                    <tr> {data[0] && columns.map((heading) => <th>{heading}</th>)} </tr>
+                    <tr> 
+                        {props.data[0] && columns.map((heading) => 
+                            <th>{heading}
+                                <input 
+                                type="checkbox" 
+                                checked = {props.searchColumns.includes(heading)} 
+                                onChange = {(e) => {
+                                    const checked = props.searchColumns.includes(heading);
+                                    props.setSearchColumns(prev => checked  
+                                        ? prev.filter(sc => sc !== heading)
+                                        : [...prev, heading]
+                                    )
+                                }}/>
+                            </th>
+                        )} 
+                    </tr>
                 </thead>
                 <tbody>
-                    {data.map(row => <tr>
+                    {props.data.map(row => <tr>
                         {
                             columns.map(column => <td>{row[column]}</td>)
                         }
