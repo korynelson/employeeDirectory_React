@@ -24,7 +24,7 @@ function App() {
         <input type='text' value={query} onChange={(e) => setQuery(e.target.value)}/>
       </div>
       <div>
-        <DataTable data = {search(data)} setSearchColumns = {setSearchColumns} searchColumns={searchColumns}></DataTable>
+        <DataTable data = {data} searchData = {search(data)} setSearchColumns = {setSearchColumns} searchColumns={searchColumns}></DataTable>
       </div>
     </div>
   );

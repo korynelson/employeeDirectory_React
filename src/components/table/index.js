@@ -1,14 +1,10 @@
 import React from 'react';
 
 const DataTable = (props) => {
+    console.log(props.searchData)
+    console.log(props.data)
     
     const columns = props.data[0] && Object.keys(props.data[0]);
-    console.log(props.searchColumns);
-
-    const filter = (e) => {
-        console.log(e);
-        props.setSearchColumns([e]);
-    }
 
     return(
         <div>
@@ -32,11 +28,27 @@ const DataTable = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.data.map(row => <tr>
+
+                    {/*if the user is loggin in use these routes */}
+                    {props.searchData[0] && (
+                    props.searchData.map(row => 
+                    <tr>
                         {
                             columns.map(column => <td>{row[column]}</td>)
                         }
-                    </tr>)}
+                    </tr>
+                    ))}
+
+                    {/*if the user is loggin in use these routes */}
+                    {!props.searchData[0] && (
+                    props.data.map(row => 
+                    <tr>
+                        {
+                            columns.map(column => <td>{row[column]}</td>)
+                        }
+                    </tr>
+                    ))}
+
                 </tbody>
             </table>
         </div>
