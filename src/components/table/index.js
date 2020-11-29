@@ -6,13 +6,18 @@ const DataTable = (props) => {
     
     const columns = props.data[0] && Object.keys(props.data[0]);
 
+    const filter = (e) => {
+        console.log(e.target.textContent)
+        console.log(e)
+    }
+
     return(
         <div>
             <table>
                 <thead>
                     <tr> 
-                        {props.data[0] && columns.map((heading) => 
-                            <th>{heading}
+                        {props.data[0] && columns.map((heading, i) => 
+                            <th key = {heading} id = {heading} onClick = {(e) => filter(e)} >{heading}
                                 <input 
                                 type="checkbox" 
                                 checked = {props.searchColumns.includes(heading)} 
@@ -31,20 +36,20 @@ const DataTable = (props) => {
 
                     {/*if the user is loggin in use these routes */}
                     {props.searchData[0] && (
-                    props.searchData.map(row => 
-                    <tr>
+                    props.searchData.map((row,i) => 
+                    <tr id ={i*100} key = {i*100}>
                         {
-                            columns.map(column => <td>{row[column]}</td>)
+                            columns.map((column,j) => <td key = {i*100+j} id = {i*100+j}>{row[column]}</td>)
                         }
                     </tr>
                     ))}
 
                     {/*if the user is loggin in use these routes */}
                     {!props.searchData[0] && (
-                    props.data.map(row => 
-                    <tr>
+                    props.data.map((row,i) => 
+                    <tr key = {i*100} id = {i*100}>
                         {
-                            columns.map(column => <td>{row[column]}</td>)
+                            columns.map((column,j) => <td key = {i*100+j} id = {i*100+j}>{row[column]}</td>)
                         }
                     </tr>
                     ))}
