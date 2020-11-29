@@ -1,32 +1,27 @@
-import React, {useEffect, useState} from 'react';
-import DataTable from './components/table/index';
-import RandomData from './components/table/randomdata';
+import DataGrid from 'react-data-grid';
+import 'react-data-grid/dist/react-data-grid.css';
+import RandomData from './randomdata';
+ 
+const columns = [
+  { key: 'id', name: 'ID' },
+  { key: 'firstname', name: 'First Name' },
+  { key: 'lastname', name: 'Last Name' },
+  { key: 'email', name: 'Email' },
+  { key: 'phone', name: 'Phone Number' },
+  { key: 'address', name: 'Address' },
+  { key: 'city', name: 'Zip Code' }
 
+];
+
+ 
+const rows = RandomData;
+ 
 function App() {
-  const[data, setData] = useState([]);
-  const[query, setQuery] = useState('');
-  const[searchColumns, setSearchColumns] = useState(["firstname", "lastname"])
-  const columns = data[0] && Object.keys(data[0]);
-
-
-  useEffect(() => {
-    setData(RandomData);
-  }, [])
-
-  const search = (rows) => {
-    return rows.filter((row) => 
-    searchColumns.some((column) => row[column].toString().toLowerCase().indexOf(query.toLowerCase()) > -1))
-  }
-
   return (
-    <div className="App">
-      <div>
-        <input type='text' value={query} onChange={(e) => setQuery(e.target.value)}/>
-      </div>
-      <div>
-        <DataTable data = {data} searchData = {search(data)} setSearchColumns = {setSearchColumns} searchColumns={searchColumns}></DataTable>
-      </div>
-    </div>
+    <DataGrid id = "table"
+      columns={columns}
+      rows={rows}
+    />
   );
 }
 
