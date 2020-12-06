@@ -23,7 +23,7 @@ Clone this repository and run command "npm install" to get dependencies
 ### To run locally
 Enter the command "npm start" to start application and navigate to localhost:8080 in your browser
 ### Use on Heroku
-[Heroku Application]()
+[Heroku Application](https://korys-employee-directory.herokuapp.com/)
 
 ## License
 This repository is licensed under the MIT license
